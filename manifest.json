@@ -1,0 +1,20 @@
+{
+  "name": "Guia Fácil do CNPJ Técnico",
+  "short_name": "CNPJ Técnico",
+  "description": "Guia interativo sobre o CNPJ Técnico: checklist, linha do tempo, glossário e simulador de impacto financeiro.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf5e9",
+  "theme_color": "#2c7a8c",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -3,6 +3,16 @@
 <head>
 <title>Guia Fácil do CNPJ Técnico</title>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2c7a8c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CNPJ Técnico">
+<meta name="description" content="Guia interativo sobre o CNPJ Técnico: checklist, linha do tempo, glossário e simulador de impacto financeiro.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
 :root{
@@ -425,9 +435,12 @@ section.page h2{font-size:clamp(24px,4vw,32px);}
   font-style:italic;
 }
 
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
 /* COMPARISON TABLE */
 .cmp-table{
   width:100%;
+  min-width:560px;
   border-collapse:separate;
   border-spacing:0;
   background:var(--surface);
@@ -509,6 +522,12 @@ footer{
   .toc{grid-template-columns:1fr;}
   .glossary{grid-template-columns:1fr;}
   .timeline{flex-direction:column;}
+  .prof-card{grid-template-columns:1fr;gap:6px;}
+  .sim-compare{grid-template-columns:1fr;}
+  .calc-row label{min-width:0;width:100%;}
+  section.page{padding:44px 0;}
+  .icon-badge{width:44px;height:44px;}
+  .icon-badge svg{width:22px;height:22px;}
 }
 </style>
 </head>
@@ -777,18 +796,20 @@ footer{
       </div>
       <p class="lede">O que muda na prática pra quem se enquadra.</p>
 
-      <table class="cmp-table">
-        <thead>
-          <tr><th>Aspecto</th><th class="hl">Pessoa Física (hoje)</th><th class="hl">Com CNPJ Técnico</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Emissão de documento fiscal</td><td class="pf-col">RPA / recibo avulso</td><td class="pj-col">Documento fiscal eletrônico vinculado ao cadastro</td></tr>
-          <tr><td>Tributação sobre o rendimento</td><td class="pf-col">Tabela progressiva do IRPF (até 27,5%)</td><td class="pj-col">Regras específicas de IBS/CBS sobre a atividade</td></tr>
-          <tr><td>Abertura de empresa</td><td class="pf-col">Não se aplica</td><td class="pj-col">Não é necessário abrir CNPJ tradicional</td></tr>
-          <tr><td>Complexidade do cadastro</td><td class="pf-col">—</td><td class="pj-col">Simplificado, modelo inspirado no MEI</td></tr>
-          <tr><td>Consequência de não regularizar</td><td class="pf-col">Risco de inconsistência fiscal a partir de jan/2027</td><td class="pj-col">Emissão de documento fiscal dentro da regra</td></tr>
-        </tbody>
-      </table>
+      <div class="table-scroll">
+        <table class="cmp-table">
+          <thead>
+            <tr><th>Aspecto</th><th class="hl">Pessoa Física (hoje)</th><th class="hl">Com CNPJ Técnico</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Emissão de documento fiscal</td><td class="pf-col">RPA / recibo avulso</td><td class="pj-col">Documento fiscal eletrônico vinculado ao cadastro</td></tr>
+            <tr><td>Tributação sobre o rendimento</td><td class="pf-col">Tabela progressiva do IRPF (até 27,5%)</td><td class="pj-col">Regras específicas de IBS/CBS sobre a atividade</td></tr>
+            <tr><td>Abertura de empresa</td><td class="pf-col">Não se aplica</td><td class="pj-col">Não é necessário abrir CNPJ tradicional</td></tr>
+            <tr><td>Complexidade do cadastro</td><td class="pf-col">—</td><td class="pj-col">Simplificado, modelo inspirado no MEI</td></tr>
+            <tr><td>Consequência de não regularizar</td><td class="pf-col">Risco de inconsistência fiscal a partir de jan/2027</td><td class="pj-col">Emissão de documento fiscal dentro da regra</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -982,6 +1003,12 @@ footer{
   renda.addEventListener('input', updateCalc);
   jaMei.addEventListener('change', updateCalc);
   updateCalc();
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('service-worker.js').catch(function(){});
+    });
+  }
 })();
 </script>
 
