@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Guia Fácil do CNPJ Técnico</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#faf5e9;
+  --surface:#ffffff;
+  --surface-2:#fdf1dc;
+  --ink:#22303a;
+  --ink-muted:#66717a;
+  --primary:#2c7a8c;
+  --primary-dark:#1c5766;
+  --primary-soft:#dcf0f0;
+  --accent:#f2a93b;
+  --accent-dark:#c9821d;
+  --accent-soft:#fdecc4;
+  --good:#3f9152;
+  --good-soft:#e0f0e2;
+  --alert:#d9634a;
+  --alert-soft:#fbe1da;
+  --violet:#8b5fbf;
+  --violet-soft:#ede2f7;
+  --sky:#3d7ab8;
+  --sky-soft:#e2edf7;
+  --line:#e6dcc4;
+  --shadow: 0 10px 30px -12px rgba(34,48,58,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#181f22;
+    --surface:#212b2f;
+    --surface-2:#26333a;
+    --ink:#eef2ee;
+    --ink-muted:#a3b0b3;
+    --primary:#5fb8c9;
+    --primary-dark:#8fd3df;
+    --primary-soft:#1c3a3e;
+    --accent:#f6c069;
+    --accent-dark:#f2a93b;
+    --accent-soft:#3a2f1a;
+    --good:#7fc98f;
+    --good-soft:#1e3324;
+    --alert:#e8907c;
+    --alert-soft:#3a231e;
+    --violet:#c9a3f0;
+    --violet-soft:#2e2440;
+    --sky:#8ec1ee;
+    --sky-soft:#1e2c3a;
+    --line:#37413f;
+    --shadow: 0 10px 30px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#181f22;
+  --surface:#212b2f;
+  --surface-2:#26333a;
+  --ink:#eef2ee;
+  --ink-muted:#a3b0b3;
+  --primary:#5fb8c9;
+  --primary-dark:#8fd3df;
+  --primary-soft:#1c3a3e;
+  --accent:#f6c069;
+  --accent-dark:#f2a93b;
+  --accent-soft:#3a2f1a;
+  --good:#7fc98f;
+  --good-soft:#1e3324;
+  --alert:#e8907c;
+  --alert-soft:#3a231e;
+  --violet:#c9a3f0;
+  --violet-soft:#2e2440;
+  --sky:#8ec1ee;
+  --sky-soft:#1e2c3a;
+  --line:#37413f;
+  --shadow: 0 10px 30px -12px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Nunito Sans",system-ui,sans-serif;
+  line-height:1.6;
+}
+h1,h2,h3,h4{font-family:"Baloo 2",system-ui,sans-serif;margin:0;text-wrap:balance;color:var(--ink);}
+.mono{font-family:"IBM Plex Mono",monospace;}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+/* PROGRESS NAV */
+.pagebar{
+  position:sticky;top:0;z-index:10;
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
+  padding:12px 0;
+}
+.pagebar-inner{
+  max-width:920px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;gap:8px;overflow-x:auto;
+}
+.dot{
+  flex:0 0 auto;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  padding:5px 10px;
+  border-radius:100px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--ink-muted);
+  white-space:nowrap;
+}
+
+/* COVER */
+.cover{
+  padding:60px 0 20px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cover .kicker{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--primary-dark);
+  margin-bottom:16px;
+}
+.cover h1{
+  font-size:clamp(34px,6vw,54px);
+  color:var(--primary-dark);
+  font-weight:800;
+}
+.cover .sub{
+  font-size:18px;
+  color:var(--ink-muted);
+  max-width:52ch;
+  margin:18px auto 0;
+}
+.cover-badge{
+  display:inline-flex;gap:10px;align-items:center;
+  margin-top:26px;
+  background:var(--accent-soft);
+  border:1px solid var(--accent);
+  color:var(--accent-dark);
+  padding:10px 18px;
+  border-radius:100px;
+  font-weight:700;
+  font-size:14px;
+}
+
+
+.toc{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  text-align:left;
+}
+.toc-item{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 16px;
+  font-size:13px;
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+.toc-item .num{
+  font-family:"Baloo 2";
+  font-weight:800;
+  color:var(--primary);
+  font-size:18px;
+}
+.toc-item span.label{color:var(--ink-muted);font-weight:600;}
+
+/* SECTIONS - full bleed color bands */
+section.page{
+  padding:64px 0;
+}
+section.page .wrap{position:relative;}
+.eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.icon-badge{
+  width:56px;height:56px;flex:0 0 auto;
+  border-radius:16px;
+  background:var(--surface);
+  border:2px solid var(--ic);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);
+}
+.icon-badge svg{width:28px;height:28px;stroke:var(--ic);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.eyebrow-text .pageno{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ic);
+  display:block;
+  margin-bottom:2px;
+}
+section.page h2{font-size:clamp(24px,4vw,32px);}
+.lede{color:var(--ink-muted);max-width:64ch;margin:12px 0 32px;font-size:15.5px;}
+
+.tape{
+  position:absolute;
+  top:-14px;right:6%;
+  width:90px;height:28px;
+  background:var(--ic);
+  opacity:.35;
+  transform:rotate(6deg);
+  border-radius:2px;
+}
+
+/* ORG CHART (o que é / quem precisa / quando / como / o que não muda) */
+.orgchart{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:32px 24px 24px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.oc-hub{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:112px;height:112px;border-radius:50%;
+  background:var(--primary);color:#fff;
+  font-family:"Baloo 2";font-weight:700;font-size:16px;line-height:1.25;
+}
+.oc-trunk{width:2px;height:26px;background:var(--line);margin:0 auto;}
+.oc-bus{height:2px;background:var(--line);}
+.oc-row{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+  padding-top:26px;
+}
+.oc-card{
+  position:relative;
+  background:var(--surface-2);
+  border:2px solid var(--card-color,var(--primary));
+  border-radius:14px;
+  padding:16px 10px 14px;
+}
+.oc-card::before{
+  content:"";
+  position:absolute;top:-26px;left:50%;
+  width:2px;height:26px;
+  background:var(--line);
+  transform:translateX(-50%);
+}
+.oc-card .ic{font-size:22px;margin-bottom:6px;}
+.oc-card .t{font-family:"Baloo 2";font-weight:700;font-size:12px;color:var(--card-color,var(--primary));margin-bottom:5px;letter-spacing:.02em;}
+.oc-card .d{font-size:11.5px;color:var(--ink-muted);line-height:1.4;}
+@media (max-width:760px){
+  .oc-row{grid-template-columns:1fr;gap:10px;padding-top:16px;}
+  .oc-bus{display:none;}
+  .oc-card::before{display:none;}
+  .oc-card{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 16px;}
+  .oc-card .ic{margin-bottom:0;font-size:24px;}
+}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:12px;}
+.check-item{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px 18px;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  cursor:pointer;
+  transition:border-color .15s ease, background .15s ease;
+}
+.check-item:hover{border-color:var(--violet);}
+.check-item input{
+  width:22px;height:22px;flex:0 0 auto;margin-top:2px;
+  accent-color:var(--violet);
+}
+.check-item .txt strong{display:block;font-size:15px;margin-bottom:2px;}
+.check-item .txt span{font-size:13.5px;color:var(--ink-muted);}
+#verdict{
+  margin-top:20px;
+  padding:18px 20px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:15px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--ink-muted);
+  transition:all .2s ease;
+}
+#verdict.alert{background:var(--alert-soft);color:var(--alert);border-color:transparent;}
+#verdict.good{background:var(--good-soft);color:var(--good);border-color:transparent;}
+
+/* TIMELINE */
+.timeline{
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  padding-bottom:8px;
+}
+.tl-step{
+  flex:1;
+  min-width:220px;
+  position:relative;
+  padding:24px 18px 8px;
+  border-top:4px solid var(--accent);
+  background:var(--surface);
+  border-radius:0 0 10px 10px;
+  margin-right:2px;
+}
+.tl-step.done{border-top-color:var(--good);}
+.tl-step::before{
+  content:"";
+  position:absolute;
+  top:-9px;left:18px;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:var(--accent);
+  border:3px solid var(--surface-2);
+}
+.tl-step.done::before{background:var(--good);}
+.tl-step .date{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-muted);}
+.tl-step h4{font-size:16px;margin:6px 0 6px;}
+.tl-step p{font-size:13.5px;color:var(--ink-muted);margin:0;}
+
+/* GLOSSARY */
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.gloss-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px 20px;
+}
+.gloss-card .term{
+  font-family:"Baloo 2";
+  font-weight:700;
+  color:var(--sky);
+  font-size:17px;
+  margin-bottom:6px;
+}
+.gloss-card p{margin:0;font-size:13.5px;color:var(--ink-muted);}
+
+/* CALCULATOR */
+.calc-box{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+.calc-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px;}
+.calc-row label{font-weight:700;font-size:14px;min-width:220px;}
+.calc-row input[type=range]{flex:1;min-width:180px;accent-color:var(--good);}
+.calc-value{
+  font-family:"IBM Plex Mono",monospace;
+  font-weight:600;
+  font-size:15px;
+  color:var(--good);
+  min-width:110px;
+  text-align:right;
+}
+.calc-result{
+  margin-top:8px;
+  padding:18px 20px;
+  border-radius:12px;
+  font-size:14.5px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+}
+.calc-result.alert{background:var(--alert-soft);border-color:transparent;}
+.calc-result.good{background:var(--good-soft);border-color:transparent;}
+.calc-result b{display:block;font-size:16px;margin-bottom:4px;}
+
+.sim-toggle{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-bottom:22px;
+  cursor:pointer;
+}
+.sim-toggle input{width:20px;height:20px;accent-color:var(--good);}
+.sim-toggle span{font-size:14px;font-weight:700;}
+
+.sim-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:20px 0;
+}
+.sim-card{
+  border-radius:12px;
+  padding:18px 20px;
+  border:1px solid var(--line);
+  background:var(--surface-2);
+}
+.sim-card .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);}
+.sim-card .big{font-family:"Baloo 2";font-size:26px;font-weight:700;margin:6px 0 4px;font-variant-numeric:tabular-nums;}
+.sim-card.now .big{color:var(--good);}
+.sim-card.future .big{color:var(--alert);}
+.sim-card p{margin:0;font-size:12.5px;color:var(--ink-muted);}
+.sim-bar{height:10px;border-radius:6px;background:var(--line);margin:10px 0 4px;overflow:hidden;}
+.sim-bar-fill{height:100%;border-radius:6px;transition:width .3s ease;}
+.sim-card.now .sim-bar-fill{background:var(--good);}
+.sim-card.future .sim-bar-fill{background:var(--alert);}
+
+.mei-alert{
+  padding:16px 18px;
+  border-radius:12px;
+  background:var(--sky-soft);
+  border:1px solid transparent;
+  font-size:13.5px;
+  margin-top:10px;
+}
+.mei-alert b{color:var(--sky);}
+
+.sim-disclaimer{
+  margin-top:16px;
+  font-size:12px;
+  color:var(--ink-muted);
+  font-style:italic;
+}
+
+/* COMPARISON TABLE */
+.cmp-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  font-size:14px;
+}
+.cmp-table th,.cmp-table td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+.cmp-table th{
+  font-family:"Baloo 2";
+  font-size:15px;
+  background:var(--surface-2);
+}
+.cmp-table th.hl{color:var(--primary-dark);}
+.cmp-table tr:last-child td{border-bottom:none;}
+.pf-col{color:var(--alert);}
+.pj-col{color:var(--good);}
+
+/* PROFESSION CARDS */
+.profession-grid{display:flex;flex-direction:column;gap:12px;}
+.prof-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px 20px;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:16px;
+}
+.prof-card .who{
+  font-family:"Baloo 2";
+  font-weight:700;
+  font-size:15px;
+  color:var(--violet);
+}
+.prof-card .what p{margin:0 0 6px;font-size:13.5px;color:var(--ink-muted);}
+.prof-card .what p:last-child{margin-bottom:0;}
+.prof-card .what b{color:var(--ink);}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:4px 20px;
+}
+.faq-item summary{
+  cursor:pointer;
+  padding:14px 0;
+  font-weight:700;
+  font-size:14.5px;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{
+  content:"+";
+  font-size:20px;
+  color:var(--accent-dark);
+  flex:0 0 auto;
+  transition:transform .15s ease;
+}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item p{margin:0 0 16px;font-size:13.5px;color:var(--ink-muted);}
+
+footer{
+  padding:40px 0 60px;
+  text-align:center;
+  color:var(--ink-muted);
+  font-size:12.5px;
+}
+
+@media (max-width:680px){
+  .toc{grid-template-columns:1fr;}
+  .glossary{grid-template-columns:1fr;}
+  .timeline{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<div class="pagebar">
+  <div class="pagebar-inner">
+    <span class="dot">Guia Principal</span>
+    <span class="dot">Bônus 1 · Checklist</span>
+    <span class="dot">Bônus 2 · Linha do Tempo</span>
+    <span class="dot">Bônus 3 · Glossário</span>
+    <span class="dot">Bônus 4 · Simulador de Impacto</span>
+    <span class="dot">Bônus 5 · Comparativo</span>
+    <span class="dot">Bônus 6 · Por Profissão</span>
+    <span class="dot">Bônus 7 · Perguntas Frequentes</span>
+  </div>
+</div>
+
+<div class="cover">
+  <div class="wrap">
+    <div class="kicker">Reforma Tributária · Edição Simplificada</div>
+    <h1>Guia Fácil do<br>CNPJ Técnico</h1>
+    <p class="sub">Descubra se você precisa se cadastrar, quando isso vira obrigatório e o que muda na prática — sem juridiquês.</p>
+    <div class="cover-badge">📅 Prazo oficial: 1º de janeiro de 2027</div>
+
+    <div class="toc">
+      <div class="toc-item"><span class="num">01</span><span class="label">O que é o CNPJ Técnico, explicado em mapa mental</span></div>
+      <div class="toc-item"><span class="num">02</span><span class="label">Bônus: checklist "preciso ou não"</span></div>
+      <div class="toc-item"><span class="num">03</span><span class="label">Bônus: linha do tempo oficial</span></div>
+      <div class="toc-item"><span class="num">04</span><span class="label">Bônus: glossário visual</span></div>
+      <div class="toc-item"><span class="num">05</span><span class="label">Bônus: simulador de impacto — quanto isso pode custar pra você</span></div>
+      <div class="toc-item"><span class="num">06</span><span class="label">Bônus: comparativo Pessoa Física x CNPJ Técnico</span></div>
+      <div class="toc-item"><span class="num">07</span><span class="label">Bônus: o que muda por profissão</span></div>
+      <div class="toc-item"><span class="num">08</span><span class="label">Bônus: 20 perguntas frequentes respondidas</span></div>
+    </div>
+  </div>
+</div>
+
+  <!-- MAIN GUIDE - MIND MAP -->
+  <section class="page" style="background:var(--primary-soft);--ic:var(--primary);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 01 · Guia principal</span><h2>O que é o CNPJ Técnico?</h2></div>
+      </div>
+      <p class="lede">O organograma abaixo resume os 5 pontos que você precisa entender antes de qualquer outra coisa.</p>
+
+      <div class="orgchart">
+        <div class="oc-hub">CNPJ<br>TÉCNICO</div>
+        <div class="oc-trunk"></div>
+        <div class="oc-bus"></div>
+        <div class="oc-row">
+          <div class="oc-card" style="--card-color:var(--primary);">
+            <div class="ic">🧩</div>
+            <div class="t">O QUE É</div>
+            <div class="d">Cadastro pra emitir nota</div>
+          </div>
+          <div class="oc-card" style="--card-color:var(--primary);">
+            <div class="ic">👤</div>
+            <div class="t">QUEM PRECISA</div>
+            <div class="d">Contribuinte de IBS/CBS acima do limite</div>
+          </div>
+          <div class="oc-card" style="--card-color:var(--accent-dark);">
+            <div class="ic">📅</div>
+            <div class="t">QUANDO</div>
+            <div class="d">A partir de 01/01/2027</div>
+          </div>
+          <div class="oc-card" style="--card-color:var(--primary);">
+            <div class="ic">🖥️</div>
+            <div class="t">COMO SE CADASTRA</div>
+            <div class="d">Sistema estilo MEI, a partir de nov/2026</div>
+          </div>
+          <div class="oc-card" style="--card-color:var(--good);">
+            <div class="ic">🛡️</div>
+            <div class="t">O QUE NÃO MUDA</div>
+            <div class="d">Não é abrir empresa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glossary" style="margin-top:24px;">
+        <div class="gloss-card">
+          <div class="term" style="color:var(--primary-dark);">🧩 O que é, na prática</div>
+          <p>É um número de cadastro — parecido com um CNPJ, mas simplificado — que a Receita Federal vai exigir de pessoas físicas contribuintes de IBS e CBS pra emitir documento fiscal. Não transforma você em empresa.</p>
+        </div>
+        <div class="gloss-card">
+          <div class="term" style="color:var(--primary-dark);">👤 Quem precisa</div>
+          <p>Segundo o <b>Art. 59 da LC 214/2025</b>, quem é <b>contribuinte de IBS/CBS</b> — ou seja, tem atividade econômica habitual como pessoa física, acima do limite do nanoempreendedor. A profissão não importa: vale pra médico, personal trainer, motorista de app, revendedor ou quem aluga mais de um imóvel. Não é "toda pessoa física que emite nota", é sobre ser contribuinte de fato.</p>
+        </div>
+        <div class="gloss-card">
+          <div class="term" style="color:var(--primary-dark);">🛡️ Quem fica de fora</div>
+          <p>Nanoempreendedores com faturamento anual até R$40.500, produtores rurais com receita abaixo de R$3,6 milhões, <b>empregados CLT, aposentados sem atividade própria, investidores pessoa física e consumidores finais</b> — nenhum desses precisa do cadastro.</p>
+        </div>
+        <div class="gloss-card">
+          <div class="term" style="color:var(--primary-dark);">🗓️ O prazo real</div>
+          <p>A obrigatoriedade começaria em julho de 2026, mas foi prorrogada pela Receita Federal e pelo Comitê Gestor do IBS para 1º de janeiro de 2027.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS 1: CHECKLIST -->
+  <section class="page" style="background:var(--violet-soft);--ic:var(--violet);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 02 · Bônus 1</span><h2>Eu preciso ou não do CNPJ Técnico?</h2></div>
+      </div>
+      <p class="lede">Marque o que se aplica a você. O veredito muda em tempo real conforme você marca as caixas.</p>
+
+      <div class="checklist" id="checklist">
+        <label class="check-item">
+          <input type="checkbox" data-weight="1">
+          <span class="txt"><strong>Eu tenho atividade econômica habitual, não um bico isolado</strong><span>Atendo/presto serviço com frequência e rotina — não foi uma venda ou trabalho pontual de uma vez só</span></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" data-weight="1">
+          <span class="txt"><strong>Não sou MEI nem tenho CNPJ, e não me encaixo como nanoempreendedor</strong><span>A profissão não importa pra lei — vale pra médico, personal trainer, motorista de app ou revendedor. O que importa é não estar em nenhum desses outros enquadramentos</span></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" data-weight="1">
+          <span class="txt"><strong>Eu faturo mais de R$40.500 por ano</strong><span>Cerca de R$3.375 por mês em média</span></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" data-weight="1">
+          <span class="txt"><strong>Eu tenho mais de um imóvel alugado</strong><span>E o total recebido de aluguel é relevante dentro do critério da Receita</span></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" data-weight="-3">
+          <span class="txt"><strong>Eu já sou MEI ou já tenho CNPJ aberto</strong><span>Se você já fatura como pessoa jurídica, a regra não se aplica do mesmo jeito</span></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" data-weight="-5">
+          <span class="txt"><strong>Sou CLT, aposentado sem atividade própria, investidor ou só consumidor</strong><span>Se isso é você, a regra do CNPJ Técnico não te afeta — pode ficar tranquilo</span></span>
+        </label>
+      </div>
+
+      <div id="verdict">Marque as opções acima pra ver seu resultado.</div>
+    </div>
+  </section>
+
+  <!-- BONUS 2: TIMELINE -->
+  <section class="page" style="background:var(--accent-soft);--ic:var(--accent-dark);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 03 · Bônus 2</span><h2>Linha do tempo oficial</h2></div>
+      </div>
+      <p class="lede">As datas que realmente importam — sem enrolação.</p>
+
+      <div class="timeline">
+        <div class="tl-step done">
+          <div class="date">26 JUN 2026</div>
+          <h4>Prorrogação anunciada</h4>
+          <p>Receita Federal e Comitê Gestor do IBS adiam a obrigatoriedade, que começaria em julho de 2026.</p>
+        </div>
+        <div class="tl-step done">
+          <div class="date">NOV 2026</div>
+          <h4>Cadastro simplificado no ar</h4>
+          <p>Sistema de inscrição inspirado no modelo do MEI é liberado — digital, automatizado, mais simples.</p>
+        </div>
+        <div class="tl-step">
+          <div class="date">1º JAN 2027</div>
+          <h4>Obrigatoriedade oficial</h4>
+          <p>Pessoas físicas contribuintes de CBS/IBS que se enquadram precisam estar com o CNPJ Técnico ativo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS 3: GLOSSARY -->
+  <section class="page" style="background:var(--sky-soft);--ic:var(--sky);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M4 5c3-2 6-2 8 0v14c-2-2-5-2-8 0V5zM20 5c-3-2-6-2-8 0v14c2-2 5-2 8 0V5z"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 04 · Bônus 3</span><h2>Glossário visual</h2></div>
+      </div>
+      <p class="lede">Os termos que mais aparecem quando o assunto é CNPJ Técnico — traduzidos sem juridiquês.</p>
+
+      <div class="glossary">
+        <div class="gloss-card"><div class="term">IBS</div><p>Imposto sobre Bens e Serviços — novo tributo que substitui ICMS e ISS, cobrado por estados e municípios.</p></div>
+        <div class="gloss-card"><div class="term">CBS</div><p>Contribuição sobre Bens e Serviços — novo tributo federal que substitui PIS e Cofins.</p></div>
+        <div class="gloss-card"><div class="term">MEI</div><p>Microempreendedor Individual — modelo simplificado de CNPJ que inspirou o cadastro do CNPJ Técnico.</p></div>
+        <div class="gloss-card"><div class="term">Carnê-Leão</div><p>Sistema pelo qual autônomos recolhem Imposto de Renda mensalmente sobre o que recebem de pessoa física.</p></div>
+        <div class="gloss-card"><div class="term">Documento Fiscal Eletrônico</div><p>Nota ou recibo emitido digitalmente, exigido para comprovar a prestação de serviço perante o Fisco.</p></div>
+        <div class="gloss-card"><div class="term">Nanoempreendedor</div><p>Categoria com faturamento anual até R$40.500 — fica isenta da obrigatoriedade do CNPJ Técnico.</p></div>
+        <div class="gloss-card"><div class="term">Habitualidade</div><p>O critério que realmente decide se você precisa do cadastro: ter atividade econômica recorrente, com frequência e volume — não uma venda ou bico isolado, que não conta como habitual.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS 4: SIMULADOR DE IMPACTO -->
+  <section class="page" style="background:var(--good-soft);--ic:var(--good);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 15V9l6 3-6 3z"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 05 · Bônus 4</span><h2>Simulador de impacto: quanto isso pode custar pra você</h2></div>
+      </div>
+      <p class="lede">Arraste pra informar quanto você fatura por mês. O simulador mostra se você se enquadra, quanto pagaria hoje (fase de teste) e quanto pode pagar quando a reforma estiver totalmente valendo.</p>
+
+      <div class="calc-box">
+        <label class="sim-toggle">
+          <input type="checkbox" id="jaMei">
+          <span>Já sou MEI ou já tenho CNPJ aberto</span>
+        </label>
+
+        <div class="calc-row">
+          <label for="renda">Faturamento médio mensal</label>
+          <input type="range" id="renda" min="0" max="15000" step="100" value="3000">
+          <span class="calc-value" id="rendaValor">R$ 3.000</span>
+        </div>
+
+        <div class="calc-result" id="calcResult">
+          <b>Faturamento anual estimado: R$ 36.000</b>
+          Isso está abaixo do limite de isenção de R$40.500/ano — hoje você provavelmente ficaria de fora da obrigatoriedade.
+        </div>
+
+        <div class="sim-compare" id="simCompare" style="display:none;">
+          <div class="sim-card now">
+            <div class="tag">Hoje · fase de teste (2026)</div>
+            <div class="big" id="valorHoje">R$ 30</div>
+            <div class="sim-bar"><div class="sim-bar-fill" id="barHoje" style="width:3%;"></div></div>
+            <p>Alíquota de teste: CBS 0,9% + IBS 0,1% = 1% sobre o faturamento</p>
+          </div>
+          <div class="sim-card future">
+            <div class="tag">Projeção · reforma completa</div>
+            <div class="big" id="valorFuturo">R$ 837</div>
+            <div class="sim-bar"><div class="sim-bar-fill" id="barFuturo" style="width:28%;"></div></div>
+            <p>Alíquota de referência estimada: 27,91% (18,70% IBS + 9,21% CBS) — ainda não fechada pelo Senado</p>
+          </div>
+        </div>
+
+        <div class="mei-alert" id="meiAlert" style="display:none;">
+          💡 <b>Saída possível:</b> como MEI permite faturar até R$81.000/ano e já tem CNPJ próprio, virar MEI evita a exigência do CNPJ Técnico — vale comparar as duas opções com um contador antes de decidir.
+        </div>
+
+        <p class="sim-disclaimer">*Estimativa simplificada só pra ilustrar a diferença entre a fase de teste e a alíquota de referência em discussão — não considera créditos tributários, regime específico do seu setor nem substitui o cálculo de um contador.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS 5: COMPARISON -->
+  <section class="page" style="background:var(--primary-soft);--ic:var(--primary);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l-2 5a3 3 0 006 0L7 7zM19 7l-2 5a3 3 0 006 0l-2-5zM5 7h14M9 3h6"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 06 · Bônus 5</span><h2>Pessoa Física x CNPJ Técnico</h2></div>
+      </div>
+      <p class="lede">O que muda na prática pra quem se enquadra.</p>
+
+      <table class="cmp-table">
+        <thead>
+          <tr><th>Aspecto</th><th class="hl">Pessoa Física (hoje)</th><th class="hl">Com CNPJ Técnico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Emissão de documento fiscal</td><td class="pf-col">RPA / recibo avulso</td><td class="pj-col">Documento fiscal eletrônico vinculado ao cadastro</td></tr>
+          <tr><td>Tributação sobre o rendimento</td><td class="pf-col">Tabela progressiva do IRPF (até 27,5%)</td><td class="pj-col">Regras específicas de IBS/CBS sobre a atividade</td></tr>
+          <tr><td>Abertura de empresa</td><td class="pf-col">Não se aplica</td><td class="pj-col">Não é necessário abrir CNPJ tradicional</td></tr>
+          <tr><td>Complexidade do cadastro</td><td class="pf-col">—</td><td class="pj-col">Simplificado, modelo inspirado no MEI</td></tr>
+          <tr><td>Consequência de não regularizar</td><td class="pf-col">Risco de inconsistência fiscal a partir de jan/2027</td><td class="pj-col">Emissão de documento fiscal dentro da regra</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BONUS 6: POR PROFISSAO -->
+  <section class="page" style="background:var(--violet-soft);--ic:var(--violet);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 07 · Bônus 6</span><h2>O que muda por profissão</h2></div>
+      </div>
+      <p class="lede">Importante: a lei <b>não distingue por profissão</b> — o critério é ser contribuinte de IBS/CBS acima do limite do nanoempreendedor (R$40.500/ano), ponto. As categorias abaixo são só pra ilustrar como isso aparece na rotina de cada atividade, não são "grupos oficiais" da lei.</p>
+
+      <div class="profession-grid">
+        <div class="prof-card">
+          <div class="who">🩺 Médicos e dentistas</div>
+          <div class="what">
+            <p><b>O que muda:</b> consultas particulares e procedimentos avulsos passam a exigir documento fiscal vinculado ao CNPJ Técnico quando o faturamento anual passa de R$40.500.</p>
+            <p><b>Ponto de atenção:</b> convênios e clínicas que já descontam na fonte não mudam nada pra você — o cadastro importa principalmente pra quem atende particular direto.</p>
+          </div>
+        </div>
+        <div class="prof-card">
+          <div class="who">⚖️ Advogados e contadores</div>
+          <div class="what">
+            <p><b>O que muda:</b> honorários avulsos e consultorias cobradas fora de um escritório com CNPJ próprio entram na regra do CNPJ Técnico a partir de jan/2027.</p>
+            <p><b>Ponto de atenção:</b> se você já fatura pela sociedade/escritório (PJ), essa regra não te afeta como pessoa física — o CNPJ Técnico é pra quem recebe direto no CPF.</p>
+          </div>
+        </div>
+        <div class="prof-card">
+          <div class="who">📐 Engenheiros e arquitetos</div>
+          <div class="what">
+            <p><b>O que muda:</b> projetos e ARTs/RRTs emitidos como pessoa física passam a precisar do cadastro pra emissão do documento fiscal do serviço.</p>
+            <p><b>Ponto de atenção:</b> projetos pontuais abaixo do limite de isenção não entram na obrigatoriedade — vale usar a calculadora do Bônus 4 pra conferir seu caso.</p>
+          </div>
+        </div>
+        <div class="prof-card">
+          <div class="who">💪 Consultores, personal trainers e criadores de conteúdo</div>
+          <div class="what">
+            <p><b>O que muda:</b> quem hoje emite recibo avulso ou nem emite nada formal precisa se organizar — essa é a categoria com maior risco de ser pega de surpresa, porque é a que menos acompanha notícia fiscal.</p>
+            <p><b>Ponto de atenção:</b> se você já ultrapassa R$3.375/mês em média, comece a se organizar agora, antes do sistema simplificado abrir em nov/2026.</p>
+          </div>
+        </div>
+        <div class="prof-card">
+          <div class="who">🏠 Quem aluga imóveis (pessoa física)</div>
+          <div class="what">
+            <p><b>O que muda:</b> proprietários com mais de um imóvel alugado, cujo total recebido ultrapasse o critério combinado de quantidade + valor, passam a precisar do CNPJ Técnico pra formalizar a locação.</p>
+            <p><b>Ponto de atenção:</b> esse é o critério mais confuso de todos — mistura número de imóveis com faturamento, e ainda não tem um número oficial fechado de "quantos imóveis" configuram a obrigatoriedade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS 7: FAQ -->
+  <section class="page" style="background:var(--accent-soft);--ic:var(--accent-dark);">
+    <div class="wrap">
+      <div class="tape"></div>
+      <div class="eyebrow-row">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M9.5 9a2.5 2.5 0 015 0c0 2-2.5 2-2.5 4.5"/><circle cx="12" cy="17.5" r=".6" fill="var(--ic)"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <div class="eyebrow-text"><span class="pageno">Página 08 · Bônus 7</span><h2>Perguntas frequentes</h2></div>
+      </div>
+      <p class="lede">As dúvidas que mais aparecem quando o assunto é CNPJ Técnico. Clique pra abrir cada uma.</p>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Toda pessoa física que emite nota precisa do CNPJ Técnico?</summary>
+          <p>Não, e a própria lei é clara nisso. O <b>Art. 59 da LC 214/2025</b> obriga ao cadastro quem é <b>contribuinte de IBS e CBS</b> — não "toda pessoa física que emite nota" de forma genérica. E o <b>Art. 26, IV</b> da mesma lei cria o <b>nanoempreendedor</b>: pessoa física com renda até R$40.500/ano, sem MEI, que a lei diz expressamente que <b>não é contribuinte</b> de IBS/CBS — logo, fica fora da obrigação. A profissão não importa (não existe critério de "profissão regulamentada" na lei): o que importa é ter atividade econômica habitual acima desse valor.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Isso significa que eu vou pagar mais imposto?</summary>
+          <p>Não necessariamente. O CNPJ Técnico é um cadastro pra emissão de documento fiscal — a alíquota de IBS/CBS que incide sobre o seu serviço é definida pela reforma tributária em si, não pelo fato de você ter o cadastro. O cadastro organiza a cobrança, não cria um imposto novo por si só.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Preciso contratar um contador agora?</summary>
+          <p>Não é urgente hoje, mas vale se antecipar. Como o sistema simplificado só abre em novembro de 2026, não tem o que "contratar" pra fazer ainda — o ideal é já avisar seu contador (se tiver um) que essa mudança está vindo, pra ele te avisar assim que abrir.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Meu cliente vai perceber alguma diferença na nota que eu emito?</summary>
+          <p>Sim, o documento fiscal eletrônico vinculado ao CNPJ Técnico deve ter um formato diferente do recibo avulso ou RPA que você usa hoje — mas isso ainda depende dos detalhes técnicos que a Receita vai divulgar junto com o sistema simplificado.</p>
+        </details>
+        <details class="faq-item">
+          <summary>E se eu não me cadastrar a tempo, o que acontece?</summary>
+          <p>O risco é ficar em situação irregular pra emitir documento fiscal a partir de 1º de janeiro de 2027, o que pode gerar inconsistência fiscal e problemas na hora de declarar seus rendimentos. Ainda não há uma multa específica divulgada — mas o histórico de outras obrigações da reforma mostra que atrasar costuma sair mais caro do que se adequar a tempo.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Isso afeta meu MEI ou Simples Nacional?</summary>
+          <p>Não da mesma forma. O CNPJ Técnico é voltado a quem atua como pessoa física (sem CNPJ nenhum hoje). Quem já é MEI ou já tem empresa no Simples Nacional segue as regras de transição da reforma tributária que já existem pra pessoa jurídica — são trilhas diferentes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Dá pra evitar o CNPJ Técnico virando MEI?</summary>
+          <p>Sim, essa é a principal saída de verdade. Quem já é MEI usa o CNPJ do próprio MEI e não precisa do CNPJ Técnico — são cadastros que não se sobrepõem. Como o MEI permite faturar até R$81.000/ano, quem está dentro desse limite pode formalizar como MEI em vez de esperar o CNPJ Técnico. Não é "opcional" ficar sem nenhum cadastro, mas você pode escolher qual caminho seguir — vale comparar as duas opções com um contador, porque a tributação de cada uma é diferente.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Preciso "abrir uma empresa de verdade" pra isso?</summary>
+          <p>Não. Esse é o ponto mais mal entendido: o CNPJ Técnico é um cadastro simplificado, inspirado no modelo do MEI — você continua sendo pessoa física pra praticamente todos os efeitos, só ganha um número de cadastro pra emitir documento fiscal.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quanto custa fazer esse cadastro?</summary>
+          <p>Os valores oficiais (se houver alguma taxa) ainda não foram divulgados, já que o sistema só entra no ar em novembro de 2026. O modelo MEI, que serviu de inspiração, é gratuito pra abertura — a expectativa é que o CNPJ Técnico siga essa mesma lógica.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Onde vou fazer esse cadastro quando abrir?</summary>
+          <p>Pelo portal da Receita Federal / Comitê Gestor do IBS, de forma digital e automatizada — mesma lógica de autoatendimento do Portal do Empreendedor usado hoje pelo MEI.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Guia Fácil do CNPJ Técnico — material educativo e informativo. Não substitui orientação de contador ou advogado para o seu caso específico.
+  </footer>
+
+<script>
+(function(){
+  const boxes = document.querySelectorAll('#checklist input[type=checkbox]');
+  const verdict = document.getElementById('verdict');
+  function update(){
+    let score = 0;
+    let anyChecked = false;
+    boxes.forEach(b=>{ if(b.checked){ score += parseInt(b.dataset.weight,10); anyChecked = true; }});
+    verdict.classList.remove('alert','good');
+    if(!anyChecked){
+      verdict.textContent = 'Marque as opções acima pra ver seu resultado.';
+      return;
+    }
+    if(score >= 3){
+      verdict.textContent = '⚠️ Você provavelmente PRECISA se atentar ao CNPJ Técnico. Vale revisar o Bônus 4 (simulador de impacto) e confirmar com seu contador antes de janeiro de 2027.';
+      verdict.classList.add('alert');
+    } else {
+      verdict.textContent = '✅ Pelo que você marcou, é menos provável que a obrigatoriedade se aplique a você agora — mas continue de olho nas atualizações.';
+      verdict.classList.add('good');
+    }
+  }
+  boxes.forEach(b=>b.addEventListener('change',update));
+
+  const renda = document.getElementById('renda');
+  const rendaValor = document.getElementById('rendaValor');
+  const calcResult = document.getElementById('calcResult');
+  const jaMei = document.getElementById('jaMei');
+  const simCompare = document.getElementById('simCompare');
+  const meiAlert = document.getElementById('meiAlert');
+  const valorHoje = document.getElementById('valorHoje');
+  const valorFuturo = document.getElementById('valorFuturo');
+  const barHoje = document.getElementById('barHoje');
+  const barFuturo = document.getElementById('barFuturo');
+  const LIMITE_NANO = 40500;
+  const TETO_MEI = 81000;
+  const ALIQ_TESTE = 0.01;
+  const ALIQ_REFERENCIA = 0.2791;
+  function fmt(v){ return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+  function updateCalc(){
+    const mensal = parseInt(renda.value,10);
+    const anual = mensal*12;
+    rendaValor.textContent = fmt(mensal);
+    calcResult.classList.remove('alert','good');
+
+    if(jaMei.checked){
+      calcResult.innerHTML = '<b>Faturamento anual estimado: '+fmt(anual)+'</b>Como você já é MEI/CNPJ, a regra do CNPJ Técnico não se aplica a você da mesma forma — seu cadastro atual já resolve a emissão de documento fiscal.';
+      calcResult.classList.add('good');
+      simCompare.style.display = 'none';
+      meiAlert.style.display = 'none';
+      return;
+    }
+
+    if(anual > LIMITE_NANO){
+      calcResult.innerHTML = '<b>Faturamento anual estimado: '+fmt(anual)+'</b>Isso ultrapassa o limite do nanoempreendedor (R$40.500/ano) — você está no grupo que mais provavelmente precisará do CNPJ Técnico.';
+      calcResult.classList.add('alert');
+      simCompare.style.display = 'grid';
+      const hoje = mensal * ALIQ_TESTE;
+      const futuro = mensal * ALIQ_REFERENCIA;
+      valorHoje.textContent = fmt(hoje) + '/mês';
+      valorFuturo.textContent = fmt(futuro) + '/mês';
+      barHoje.style.width = Math.min(ALIQ_TESTE*100*3, 100) + '%';
+      barFuturo.style.width = Math.min(ALIQ_REFERENCIA*100*3, 100) + '%';
+      if(anual <= TETO_MEI){
+        meiAlert.style.display = 'block';
+      } else {
+        meiAlert.style.display = 'none';
+      }
+    } else {
+      calcResult.innerHTML = '<b>Faturamento anual estimado: '+fmt(anual)+'</b>Isso está abaixo do limite do nanoempreendedor (R$40.500/ano) — hoje você provavelmente ficaria de fora da obrigatoriedade.';
+      calcResult.classList.add('good');
+      simCompare.style.display = 'none';
+      meiAlert.style.display = 'none';
+    }
+  }
+  renda.addEventListener('input', updateCalc);
+  jaMei.addEventListener('change', updateCalc);
+  updateCalc();
+})();
+</script>
+
+</body>
+</html>
